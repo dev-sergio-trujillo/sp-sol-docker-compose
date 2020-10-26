@@ -1,0 +1,195 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "spsolutions-api",
+    "version": "1.0",
+    "title": "spsolutions"
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/strujillo/api-empleados/1.0",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/product/findAll": {
+      "get": {
+        "tags": [
+          "product-api"
+        ],
+        "summary": "Busca los productos",
+        "description": "Busca todos los productos en todas las categorias.",
+        "operationId": "findAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "tags": [
+          "product-api"
+        ],
+        "summary": "Busca un producto por Id",
+        "operationId": "findById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El id del producto a buscar",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "No se han proporcionado los argumentos necesarios"
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "tags": [
+          "product-api"
+        ],
+        "summary": "Guarda el producto en la base de datos",
+        "operationId": "save",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "operacion exitosa",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "404": {
+            "description": "producto no encontrado"
+          }
+        }
+      }
+    },
+    "/product/update/{id}": {
+      "put": {
+        "tags": [
+          "product-api"
+        ],
+        "summary": "Actualiza el producto en la base de datos",
+        "operationId": "update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Actualizacion del usuario",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "404": {
+            "description": "producto no encontrado"
+          }
+        }
+      }
+    },
+    "/product/delete/{id}": {
+      "delete": {
+        "tags": [
+          "product-api"
+        ],
+        "summary": "Elimina un producto",
+        "description": "Elimina un producto de la base de datos",
+        "operationId": "delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El id del elemento a ser elimado",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "ninguno"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "idProduct": {
+          "type": "integer"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/Product"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "idCategory": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    }
+  }
+}
