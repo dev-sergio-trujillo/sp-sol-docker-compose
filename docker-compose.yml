@@ -1,0 +1,37 @@
+version: '3.7'
+services: 
+  server-config:
+      image: server-config:latest
+      ports: 
+          - "8888:8888"
+      restart: always
+      networks:
+          - spsolutions-network
+  eureka-server:
+      image: eureka-server:latest
+      ports:
+          - "8761:8761"
+      restart: always
+      networks: 
+          - spsolutions-network      
+  products:
+      image: products:latest
+      restart: always
+      # ports: 
+      #   - "9000:9000"
+      networks: 
+        - spsolutions-network   
+  zuul:
+      image: zuul:latest
+      restart: always
+      ports:
+        - "9080:9080"
+      networks: 
+        - spsolutions-network
+      depends_on: 
+          - server-config
+          - eureka-server 
+          - products
+networks: 
+    spsolutions-network:
+        

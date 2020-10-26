@@ -1,0 +1,10 @@
+cd eureka-server && .\mvnw.cmd clean package -DskipTests && docker build -t eureka-server:latest . && cd .. &&
+
+cd products && .\mvnw.cmd clean package -DskipTests && docker build -t products:latest . && cd .. &&
+
+cd server-config && .\mvnw.cmd clean package -DskipTests && docker build -t server-config:latest . && cd .. &&
+
+cd zuul && .\mvnw.cmd clean package -DskipTests && docker build -t zuul:latest . && cd ..
+
+
+cd eureka-server && .\mvnw.cmd clean package -DskipTests && docker build -t eureka-server:latest . && cd .. && cd products && .\mvnw.cmd clean package -DskipTests && docker build -t products:latest . && cd .. && cd server-config && .\mvnw.cmd clean package -DskipTests && docker build -t server-config:latest . && cd .. && cd zuul && .\mvnw.cmd clean package -DskipTests && docker build -t zuul:latest . && cd ..
